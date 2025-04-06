@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Z-Pattern Layout Example</title>
+    <style>
+        /* Reset styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Top row - forms the top line of the Z */
+        header {
+            background-color: #2c3e50;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* Diagonal section - forms the middle diagonal of the Z */
+        .hero {
+            background-image: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            padding: 80px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .diagonal-divider {
+            position: absolute;
+            height: 100px;
+            width: 100%;
+            bottom: -50px;
+            background-color: #f9f9f9;
+            transform: skewY(-3deg);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 14px 32px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .cta-button:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        /* Bottom row - forms the bottom line of the Z */
+        .bottom-section {
+            padding: 80px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+        }
+        
+        .features {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .features h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        /* Call to action - bottom right of the Z */
+        .cta-section {
+            flex: 1;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section p {
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .testimonials {
+            margin-top: 60px;
+            padding: 50px 5%;
+            background-color: #fff;
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            padding: 25px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links a {
+            color: #ecf0f1;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 900px) {
+            .bottom-section {
+                flex-direction: column;
+            }
+            
+            .features {
+                padding-right: 0;
+                margin-bottom: 40px;
+                width: 100%;
+            }
+            
+            .cta-section {
+                width: 100%;
+            }
+            
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top line of the Z - Logo (left) to Navigation (right) -->
+    <header>
+        <div class="logo">TechVision</div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Solutions</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Diagonal part of the Z - Hero section with visual elements -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transforming Ideas Into Digital Reality</h1>
+            <p>We create innovative digital solutions that help businesses grow, adapt, and succeed in today's competitive landscape.</p>
+            <a href="#" class="cta-button">Explore Solutions</a>
+        </div>
+        <div class="diagonal-divider"></div>
+    </section>
+
+    <!-- Bottom line of the Z - Features (left) to CTA (right) -->
+    <section class="bottom-section">
+        <div class="features">
+            <h2>Why Choose TechVision</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">
+                        <h3>Innovative Solutions</h3>
+                        <p>Cutting-edge technology customized for your specific business needs.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">
+                        <h3>Expert Team</h3>
+                        <p>Experienced professionals with deep industry knowledge.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">
+                        <h3>Proven Results</h3>
+                        <p>Track record of delivering successful projects on time and on budget.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">
+                        <h3>Ongoing Support</h3>
+                        <p>Dedicated customer service and technical assistance whenever you need it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom-right of the Z - Strong call to action -->
+        <div class="cta-section">
+            <h2>Ready to Get Started?</h2>
+            <p>Schedule a free consultation with our experts and discover how we can help your business thrive in the digital age.</p>
+            <a href="#" class="cta-button">Book a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Additional content after the Z-pattern -->
+    <section class="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p>"TechVision completely transformed our outdated systems into a streamlined digital solution that increased our productivity by 40%."</p>
+                <div class="testimonial-author">- Michael Robertson, CEO of GlobalTech</div>
+            </div>
+            <div class="testimonial">
+                <p>"Working with the TechVision team was effortless. They understood our vision and turned it into reality beyond our expectations."</p>
+                <div class="testimonial-author">- Jennifer Chen, Marketing Director</div>
+            </div>
+            <div class="testimonial">
+                <p>"The custom software TechVision developed for us has been a game-changer. Our ROI exceeded projections within the first six months."</p>
+                <div class="testimonial-author">- David Martinez, Operations Manager</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Careers</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <p>&copy; 2023 TechVision. All rights reserved.</p>
+    </footer>
+</body>
+</html>
